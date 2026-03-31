@@ -2,15 +2,6 @@ import math
 
 
 levels = [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600, 51200]
-input_data = input('Введите имя игрока--- его уровень--- количество имеющегося опыта--- количество нового опыта----' \
-'---  урон оружия и защита---: ')
-data = input_data.split()
-name = str(data[0])
-level = int(data[1])
-experience = int(data[2])
-add_exp = int(data[3])
-weapon = int(data[4])
-armor = int(data[5])
 
 
 
@@ -54,7 +45,7 @@ class Warrior(Igrok):
         print(self.level)
 
     def defend(self):
-        df = math.log(self.opit)*armor
+        df = math.log(self.opit)*self.armor
         print('защита')
         print(df)
     def __del__(self):
@@ -63,10 +54,15 @@ class Warrior(Igrok):
 
 
 def main():
+    input_data = input('Введите: Имя, Уровень, Опыт, Доп.опыт, Урон, Броня\n')
+    data = input_data.split()
         
-    player = Igrok(name, level, experience, add_exp)
+    name = data[0]
+    level, exp, add_exp, weapon, armor = map(int, data[1:])
+        
+    player = Igrok(name, level, exp, add_exp)
     player.show_stars()
-    player = Warrior(name,level,experience,add_exp,weapon,armor)
+    player = Warrior(name,level,exp,add_exp,weapon,armor)
     player.attack()
     player.defend()
 if __name__ == '__main__':
